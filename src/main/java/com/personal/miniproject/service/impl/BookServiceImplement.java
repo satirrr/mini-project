@@ -46,4 +46,14 @@ public class BookServiceImplement implements BookService {
     public void deleteBookById(String bookId) {
         bookRepository.deleteBookByIdNative(bookId);
     }
+
+    @Override
+    public void lendingBook(String bookId) {
+        Book book = bookRepository.getBookByIdNative(bookId);
+        if (book.getStock() > 0){
+            book.setStock(book.getStock() - 1);
+        }else{
+            throw new RuntimeException();
+        }
+    }
 }

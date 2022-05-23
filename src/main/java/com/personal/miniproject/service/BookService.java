@@ -9,4 +9,5 @@ public interface BookService {
     void insertBook(Book book);
     void updateBook(Book book);
     void deleteBookById(String bookId);
+    void lendingBook(String bookId);
 }
