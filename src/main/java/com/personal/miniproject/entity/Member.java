@@ -17,8 +17,8 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class Member {
     @Id
-    @GenericGenerator(name="memberId_generator", strategy = "uuid")
-    @GeneratedValue
+    @GenericGenerator(name="memberId_uuid", strategy = "uuid")
+    @GeneratedValue(generator = "memberId_uuid")
     private String memberId;
     private String name;
     private String address;

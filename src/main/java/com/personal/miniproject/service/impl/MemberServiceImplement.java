@@ -23,4 +23,14 @@ public class MemberServiceImplement implements MemberService {
             throw new RuntimeException();
         }
     }
+
+    @Override
+    public Member insertMember(Member member) {
+       return memberRepository.save(member);
+    }
+
+    @Override
+    public void deleteMemberById(String memberId) {
+        memberRepository.deleteById(memberId);
+    }
 }

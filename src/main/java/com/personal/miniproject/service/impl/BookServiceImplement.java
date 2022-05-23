@@ -19,11 +19,11 @@ public class BookServiceImplement implements BookService {
     }
 
     @Override
-    public void insertBook(Book book) {
+    public Book insertBook(Book book) {
         String bookId = UUID.randomUUID().toString().replace("-","");
         String title = book.getTitle();
         String writer = book.getWriter();
         Integer stock = book.getStock();
-        bookRepository.insertBookNative(bookId, title, writer, stock);
+        return bookRepository.insertBookNative(bookId, title, writer, stock);
     }
 }
