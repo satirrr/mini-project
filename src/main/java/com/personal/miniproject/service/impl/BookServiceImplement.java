@@ -26,4 +26,18 @@ public class BookServiceImplement implements BookService {
         Integer stock = book.getStock();
         return bookRepository.insertBookNative(bookId, title, writer, stock);
     }
+
+    @Override
+    public void updateBook(Book book) {
+        String bookId = book.getBookId();
+        String title = book.getTitle();
+        String writer = book.getWriter();
+        Integer stock = book.getStock();
+        bookRepository.updateBookByIdNative(bookId, title, writer, stock);
+    }
+
+    @Override
+    public void deleteBookById(String bookId) {
+        bookRepository.deleteBookByIdNative(bookId);
+    }
 }

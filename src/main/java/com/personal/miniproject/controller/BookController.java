@@ -23,5 +23,13 @@ public class BookController {
         return bookService.insertBook(book);
     }
 
+    @PutMapping
+    public void updateBook(@RequestBody Book book){
+        bookService.updateBook(book);
+    }
 
+    @DeleteMapping
+    public void deleteBookById(@RequestParam String bookId){
+        bookService.deleteBookById(bookId);
+    }
 }
