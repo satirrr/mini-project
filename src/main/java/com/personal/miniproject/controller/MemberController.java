@@ -6,11 +6,18 @@ import com.personal.miniproject.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(PathURL.MEMBER)
 public class MemberController {
     @Autowired
     MemberService memberService;
+
+    @GetMapping("/all")
+    private List<Member> findAllMember(){
+        return memberService.getAllMember();
+    }
 
     @GetMapping
     private Member findMemberById(@RequestParam String memberId){
@@ -18,8 +25,8 @@ public class MemberController {
     }
 
     @PostMapping
-    private Member insertMember(@RequestBody Member member){
-        return memberService.insertMember(member);
+    private void insertMember(@RequestBody Member member){
+        memberService.insertMember(member);
     }
 
     @PutMapping

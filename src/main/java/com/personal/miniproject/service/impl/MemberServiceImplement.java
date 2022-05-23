@@ -6,6 +6,7 @@ import com.personal.miniproject.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -13,6 +14,11 @@ public class MemberServiceImplement implements MemberService {
 
     @Autowired
     MemberRepository memberRepository;
+
+    @Override
+    public List<Member> getAllMember() {
+        return memberRepository.findAll();
+    }
 
     @Override
     public Member getMemberById(String memberId) {
@@ -25,9 +31,11 @@ public class MemberServiceImplement implements MemberService {
     }
 
     @Override
-    public Member insertMember(Member member) {
-       return memberRepository.save(member);
+    public void insertMember(Member member) {
+        System.out.println(member);
+       memberRepository.save(member);
     }
+
 
     @Override
     public void deleteMemberById(String memberId) {
