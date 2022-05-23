@@ -10,6 +10,9 @@ import com.personal.miniproject.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class LendingHistoryServiceImplement implements LendingHistoryService {
     @Autowired
@@ -21,14 +24,25 @@ public class LendingHistoryServiceImplement implements LendingHistoryService {
 
     @Override
     public LendingHistory insertLendingHistory(LendingHistory lendingHistory) {
-        Book book = bookService.getBookById(lendingHistory.getBook().getBookId());
-        Member member = memberService.getMemberById(lendingHistory.getMember().getMemberId());
+        List<Book> bookList = bookService.getAllBook();
+        List<Member> memberList = memberService.getAllMember();
+
+        Book book = bookList.stream()
+                .filter(x -> x.getBookId().equals(lendingHistory.getBook().getBookId()))
+                .findAny().orElse(null);
+
+        Member member = memberList.stream()
+                .filter(x -> x.getMemberId().equals(lendingHistory.getMember().getMemberId()))
+                .findAny().orElse(null);
+
         LendingHistory lendingHistory1 = lendingHistoryRepository.findByMemberAndBook(member, book);
         if (lendingHistory1 != null){
             throw new RuntimeException();
         }
         LendingHistory lendingBook = LendingHistory.builder().book(book).member(member).build();
-        bookService.lendingBook(book.getBookId());
+        if (book != null) {
+            bookService.lendingBook(book.getBookId());
+        }
         return lendingHistoryRepository.save(lendingBook);
     }
 }
