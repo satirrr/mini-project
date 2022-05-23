@@ -5,13 +5,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 
 @Transactional
 public interface BookRepository extends JpaRepository<Book, String> {
 
     @Query(value = "SELECT * FROM mst_book", nativeQuery = true)
-    Book getAllBookNative();
+    List<Book> getAllBookNative();
 
     @Query(value = "SELECT * FROM mst_book WHERE book_id = ?", nativeQuery = true)
     Book getBookByIdNative(String bookId);

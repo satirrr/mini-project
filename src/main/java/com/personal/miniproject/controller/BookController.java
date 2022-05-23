@@ -6,6 +6,8 @@ import com.personal.miniproject.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(PathURL.BOOK)
 public class BookController {
@@ -14,7 +16,7 @@ public class BookController {
     BookService bookService;
 
     @GetMapping("/all")
-    public Book getAllBook(){
+    public List<Book> getAllBook(){
         return bookService.getAllBook();
     }
 
