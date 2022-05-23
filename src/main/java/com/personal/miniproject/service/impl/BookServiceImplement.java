@@ -14,17 +14,22 @@ public class BookServiceImplement implements BookService {
     BookRepository bookRepository;
 
     @Override
+    public Book getAllBook() {
+       return bookRepository.getAllBookNative();
+    }
+
+    @Override
     public Book getBookById(String bookId) {
         return bookRepository.getBookByIdNative(bookId);
     }
 
     @Override
-    public Book insertBook(Book book) {
+    public void insertBook(Book book) {
         String bookId = UUID.randomUUID().toString().replace("-","");
         String title = book.getTitle();
         String writer = book.getWriter();
         Integer stock = book.getStock();
-        return bookRepository.insertBookNative(bookId, title, writer, stock);
+        bookRepository.insertBookNative(bookId, title, writer, stock);
     }
 
     @Override

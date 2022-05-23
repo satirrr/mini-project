@@ -13,14 +13,19 @@ public class BookController {
     @Autowired
     BookService bookService;
 
+    @GetMapping("/all")
+    public Book getAllBook(){
+        return bookService.getAllBook();
+    }
+
     @GetMapping
     public Book getBookById(@RequestParam String bookId){
         return bookService.getBookById(bookId);
     }
 
     @PostMapping
-    public Book insertBook(@RequestBody Book book){
-        return bookService.insertBook(book);
+    public void insertBook(@RequestBody Book book){
+        bookService.insertBook(book);
     }
 
     @PutMapping
